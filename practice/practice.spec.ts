@@ -26,6 +26,28 @@ test("Double Button Click", async({page})=>{
     
 
 })
+
+
+
+
+test.only('Double Button Click', async ({ page }) => {
+  await page.goto('/dashboard/practice-components');
+
+  const dialogPromise = page.waitForEvent("dialog");
+
+  await page.getByRole('button', {
+    name: 'Double Click Me'
+  }).dblclick();
+
+  const dialog = await dialogPromise;
+  const dialogMessage=dialog.message();
+  console.log(dialogMessage);
+
+  expect(dialogMessage).toBe('You have double clicked');
+
+  await dialog.accept();
+});
+
 //test.only only ekta
 test("Context Button click", async ({ page }) => {
     await page.goto("/dashboard/practice-components");
